@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum AiMessageCode implements MessageCode {
+public enum AiLogMessageCode implements MessageCode {
 	INVALID_REQUEST_TYPE("AI.INVALID_REQUEST_TYPE", HttpStatus.BAD_REQUEST),
 	UPDATE_NOT_ALLOWED("AI.UPDATE_NOT_ALLOWED", HttpStatus.METHOD_NOT_ALLOWED),
 	DELETE_NOT_ALLOWED("AI.DELETE_NOT_ALLOWED", HttpStatus.METHOD_NOT_ALLOWED),

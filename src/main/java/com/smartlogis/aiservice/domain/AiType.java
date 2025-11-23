@@ -1,7 +1,7 @@
 package com.smartlogis.aiservice.domain;
 
-import com.smartlogis.aiservice.domain.exception.AiException;
-import com.smartlogis.aiservice.domain.exception.AiMessageCode;
+import com.smartlogis.aiservice.domain.exception.AiLogException;
+import com.smartlogis.aiservice.domain.exception.AiLogMessageCode;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public enum AiType {
 		try {
 			return AiType.valueOf(str.toUpperCase());
 		} catch (NullPointerException | IllegalArgumentException e) {
-			throw new AiException(AiMessageCode.INVALID_REQUEST_TYPE, e);
+			throw new AiLogException(AiLogMessageCode.INVALID_REQUEST_TYPE, e);
 		}
 	}
 }

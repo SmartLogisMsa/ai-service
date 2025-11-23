@@ -1,7 +1,7 @@
 package com.smartlogis.aiservice.domain;
 
-import com.smartlogis.aiservice.domain.exception.AiException;
-import com.smartlogis.aiservice.domain.exception.AiMessageCode;
+import com.smartlogis.aiservice.domain.exception.AiLogException;
+import com.smartlogis.aiservice.domain.exception.AiLogMessageCode;
 import com.smartlogis.common.domain.AbstractEntity;
 
 import jakarta.persistence.Column;
@@ -78,7 +78,7 @@ public class AiLog extends AbstractEntity {
 		this.status = AiStatus.FAIL;
 	}
 
-	public void delete() { throw new AiException(AiMessageCode.DELETE_NOT_ALLOWED); }
+	public void delete() { throw new AiLogException(AiLogMessageCode.DELETE_NOT_ALLOWED); }
 
 	private static void validateType(AiType type) {
 		if (type == null) {
