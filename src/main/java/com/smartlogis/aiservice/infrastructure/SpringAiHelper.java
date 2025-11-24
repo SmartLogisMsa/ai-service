@@ -7,11 +7,11 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class AiClientHelper {
+public class SpringAiHelper {
 
 	private final ChatClient vertexAiGeminiClient;
 
-	public ChatClient get(AiModel model) {
+	public ChatClient get(SpringAiModel model) {
 		return switch (model) {
 			case VERTEX_AI_GEMINI -> vertexAiGeminiClient;
 		};

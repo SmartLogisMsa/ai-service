@@ -9,19 +9,19 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.smartlogis.aiservice.application.dto.AiResponse;
-import com.smartlogis.aiservice.infrastructure.AiClientHelper;
-import com.smartlogis.aiservice.infrastructure.AiModel;
+import com.smartlogis.aiservice.infrastructure.SpringAiHelper;
+import com.smartlogis.aiservice.infrastructure.SpringAiModel;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AiCreateService {
+public class SpringAiService {
 
-	private final AiClientHelper clientHelper;
+	private final SpringAiHelper clientHelper;
 
 	public AiResponse generate(String prompt, Map<String, Object> params, String model) {
-		ChatClient client = clientHelper.get(AiModel.fromString(model));
+		ChatClient client = clientHelper.get(SpringAiModel.fromString(model));
 
 		try {
 			long start = System.currentTimeMillis();

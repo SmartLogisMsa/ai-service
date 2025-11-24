@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum AiMessageCode implements MessageCode {
+public enum SpringAiMessageCode implements MessageCode {
 	INVALID_MODEL("AI.INVALID_MODEL", HttpStatus.BAD_REQUEST),
 	;
 
