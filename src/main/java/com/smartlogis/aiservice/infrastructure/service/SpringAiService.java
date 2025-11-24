@@ -9,6 +9,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.smartlogis.aiservice.application.dto.AiResponse;
+import com.smartlogis.aiservice.application.service.AiCreateService;
 import com.smartlogis.aiservice.infrastructure.SpringAiHelper;
 import com.smartlogis.aiservice.infrastructure.SpringAiModel;
 
@@ -16,10 +17,11 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SpringAiService {
+public class SpringAiService implements AiCreateService {
 
 	private final SpringAiHelper clientHelper;
 
+	@Override
 	public AiResponse generate(String prompt, Map<String, Object> params, String model) {
 		ChatClient client = clientHelper.get(SpringAiModel.fromString(model));
 
@@ -44,6 +46,7 @@ public class SpringAiService {
 		}
 	}
 
+	@Override
 	public AiResponse generate(Resource prompt, Map<String, Object> params, String model) {
 		try {
 			String text = new String(prompt.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
