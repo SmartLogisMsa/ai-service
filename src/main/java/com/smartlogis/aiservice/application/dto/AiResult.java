@@ -2,7 +2,7 @@ package com.smartlogis.aiservice.application.dto;
 
 import com.smartlogis.aiservice.domain.AiStatus;
 
-public record AiResponse (
+public record AiResult(
 	String prompt,
 	String response,
 	String errorMessage,
@@ -10,7 +10,7 @@ public record AiResponse (
 	String model,
 	Long latency
 ) {
-	public static AiResponse from(
+	public static AiResult from(
 		String prompt,
 		String response,
 		String errorMessage,
@@ -18,7 +18,7 @@ public record AiResponse (
 		String model,
 		Long latency
 	) {
-		return new AiResponse(
+		return new AiResult(
 			prompt,
 			response,
 			errorMessage,
