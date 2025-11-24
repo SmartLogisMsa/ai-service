@@ -14,9 +14,16 @@ spring:
         service-id: config-server
 
   ai:
+    chat:
+      client:
+        enabled: false
     vertex.ai.gemini:
       projectId: ${GOOGLE_CLOUD_PROJECT_ID}
       location: us-west1
+      chat:
+        options:
+          model: gemini-2.0-flash
+          temperature: 0.4
 
 eureka:
   instance:

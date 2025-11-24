@@ -49,7 +49,7 @@ public class AiLog extends AbstractEntity {
 	private String model;
 
 	@Column
-	private Integer latency;
+	private Long latency;
 
 	public static AiLog create(AiType type, String prompt, String model) {
 		validateType(type);
@@ -65,7 +65,7 @@ public class AiLog extends AbstractEntity {
 		return aiLog;
 	}
 
-	public void success(String response, Integer latency) {
+	public void success(String response, Long latency) {
 		validateLatency(latency);
 
 		this.response = response;
@@ -98,7 +98,7 @@ public class AiLog extends AbstractEntity {
 		}
 	}
 
-	private void validateLatency(Integer latency) {
+	private void validateLatency(Long latency) {
 		if (latency == null || latency <= 0) {
 			throw new IllegalArgumentException("AI 응답시간(latency)은 0 이하일 수 없습니다.");
 		}
