@@ -16,14 +16,30 @@ java {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+ext {
+    set('springCloudVersion', "2025.0.0")
+    set('springAiVersion', "1.1.0")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+    }
 }
 
 dependencies {
     implementation 'com.github.smartlogismsa:common-module:v0.0.10'
+
     implementation 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
     annotationProcessor 'com.querydsl:querydsl-apt:5.1.0:jakarta'
     annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
     annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
+    implementation 'org.springframework.ai:spring-ai-starter-model-vertex-ai-gemini'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

@@ -1,0 +1,30 @@
+server:
+  port: 3007
+
+spring:
+  application:
+    name: ai-service
+  config:
+    import:
+      - 'optional:configserver:'
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+
+  ai:
+    vertex.ai.gemini:
+      projectId: ${GOOGLE_CLOUD_PROJECT_ID}
+      location: us-west1
+
+eureka:
+  instance:
+    prefer-ip-address: false
+    hostname: code-factory.co.kr
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:3150/eureka/
