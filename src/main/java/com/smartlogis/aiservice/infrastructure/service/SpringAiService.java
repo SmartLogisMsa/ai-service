@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.template.st.StTemplateRenderer;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
@@ -25,24 +27,27 @@ public class SpringAiService implements AiCreateService {
 	public AiCreateResult create(String prompt, Map<String, Object> params, String model) {
 		ChatClient client = clientHelper.get(SpringAiModel.fromString(model));
 
+		String fullPrompt = PromptTemplate.builder()
+			.renderer(StTemplateRenderer.builder().startDelimiterToken('{').endDelimiterToken('}').build())
+			.template(prompt)
+			.build()
+			.render(params);
+
 		try {
 			long start = System.currentTimeMillis();
 
 			String response = client.prompt()
-				.user(s -> {
-					s.text(prompt);
-					params.forEach(s::param);
-				})
+				.user(fullPrompt)
 				.call()
 				.content();
 
 			Long latency = System.currentTimeMillis() - start;
 
-			return AiCreateResult.from(prompt, response, null, "SUCCESS", model, latency);
+			return AiCreateResult.from(prompt, fullPrompt, response, null, "SUCCESS", model, latency);
 		} catch (Exception e) {
 			String errorMessage = e.getMessage();
 
-			return AiCreateResult.from(prompt, null, errorMessage, "FAIL", model, null);
+			return AiCreateResult.from(prompt, fullPrompt, null, errorMessage, "FAIL", model, null);
 		}
 	}
 

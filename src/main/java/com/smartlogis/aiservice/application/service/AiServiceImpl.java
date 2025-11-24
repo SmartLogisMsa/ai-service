@@ -41,11 +41,11 @@ public class AiServiceImpl implements AiService {
 			AiCreateResult result = aiCreateService.create(resource, params, model);
 
 			if (result.success()) {
-				aiLog.success(result.response(), result.latency());
+				aiLog.success(result.fullPrompt(), result.response(), result.latency());
 				return AiCreateResponse.from(result);
 			}
 
-			aiLog.fail(result.errorMessage());
+			aiLog.fail(result.fullPrompt(), result.errorMessage());
 			throw new AiException(AiMessageCode.INTERNAL_SERVER_ERROR, result.errorMessage());
 		} catch (IOException e) {
 			throw new RuntimeException(e);

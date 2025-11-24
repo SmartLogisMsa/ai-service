@@ -4,6 +4,7 @@ import com.smartlogis.aiservice.domain.AiStatus;
 
 public record AiCreateResult(
 	String prompt,
+	String fullPrompt,
 	String response,
 	String errorMessage,
 	AiStatus status,
@@ -12,6 +13,7 @@ public record AiCreateResult(
 ) {
 	public static AiCreateResult from(
 		String prompt,
+		String fullPrompt,
 		String response,
 		String errorMessage,
 		String status,
@@ -20,6 +22,7 @@ public record AiCreateResult(
 	) {
 		return new AiCreateResult(
 			prompt,
+			fullPrompt,
 			response,
 			errorMessage,
 			AiStatus.fromString(status),

@@ -36,6 +36,9 @@ public class AiLog extends AbstractEntity {
 	private String prompt;
 
 	@Column(columnDefinition = "TEXT")
+	private String fullPrompt;
+
+	@Column(columnDefinition = "TEXT")
 	private String response;
 
 	@Column
@@ -65,15 +68,17 @@ public class AiLog extends AbstractEntity {
 		return aiLog;
 	}
 
-	public void success(String response, Long latency) {
+	public void success(String fullPrompt, String response, Long latency) {
 		validateLatency(latency);
 
+		this.fullPrompt = fullPrompt;
 		this.response = response;
 		this.latency = latency;
 		this.status = AiStatus.SUCCESS;
 	}
 
-	public void fail(String errorMessage) {
+	public void fail(String fullPrompt, String errorMessage) {
+		this.fullPrompt = fullPrompt;
 		this.errorMessage = errorMessage;
 		this.status = AiStatus.FAIL;
 	}
