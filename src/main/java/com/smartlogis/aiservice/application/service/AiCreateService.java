@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.springframework.core.io.Resource;
 
-import com.smartlogis.aiservice.application.dto.AiResult;
+import com.smartlogis.aiservice.application.dto.AiCreateResult;
 
 public interface AiCreateService {
-	AiResult create(String prompt, Map<String, Object> params, String model);
-	AiResult create(Resource prompt, Map<String, Object> params, String model);
+	AiCreateResult create(String prompt, Map<String, Object> params, String model);
+	AiCreateResult create(Resource prompt, Map<String, Object> params, String model);
 }

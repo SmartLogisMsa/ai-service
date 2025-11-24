@@ -1,4 +1,4 @@
-package com.smartlogis.aiservice.infrastructure.exception;
+package com.smartlogis.aiservice.application.exception;
 
 import org.springframework.http.HttpStatus;
 
@@ -9,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum SpringAiMessageCode implements MessageCode {
-	INVALID_MODEL("SPRING_AI.INVALID_MODEL", HttpStatus.BAD_REQUEST),
+public enum AiMessageCode implements MessageCode {
+	INTERNAL_SERVER_ERROR("AI.INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR),
 	;
 
     private final String code;
