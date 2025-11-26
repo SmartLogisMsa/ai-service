@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.smartlogis.aiservice.infrastructure.SpringAiModel;
+import com.smartlogis.aiservice.presentation.annotation.EnumValid;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -16,6 +19,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "최종 발송 시한 요청")
 public class DeliveryDeadlineRequest {
+	@NotNull @EnumValid(enumClass = SpringAiModel.class)
+	@Schema(description = "AI 모델", defaultValue = "vertex_ai_gemini")
+	private String model = "vertex_ai_gemini";
 
 	@NotNull
 	@Schema(description = "주문 ID", example = "550e8400-e29b-41d4-a716-446655440000")
@@ -41,15 +47,19 @@ public class DeliveryDeadlineRequest {
 	private String startHub;
 
 	@Schema(description = "경유 허브")
-	private String stopoverHub;
+	private List<String> stopoverHub;
 
 	@NotBlank
-	@Schema(description = "도착 주소")
-	private String arrivalAddress;
+	@Schema(description = "도착 허브")
+	private String arrivalHub;
+
+	@NotBlank
+	@Schema(description = "배송 주소")
+	private String address;
 
 	@NotNull
-	@Schema(description = "예상 도착 시간", example = "2025-11-25T15:30:00")
-	private LocalDateTime estimateTime;
+	@Schema(description = "예상 도착 시간")
+	private Double estimateTime;
 
 	@NotNull
 	@Schema(description = "배송 담당자 정보")
