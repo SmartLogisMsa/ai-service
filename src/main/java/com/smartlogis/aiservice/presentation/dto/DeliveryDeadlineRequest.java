@@ -43,22 +43,22 @@ public class DeliveryDeadlineRequest {
 	private String orderMemo;
 
 	@NotBlank
-	@Schema(description = "출발 허브")
+	@Schema(description = "출발 허브", example = "강남구 도곡로 112")
 	private String startHub;
 
 	@Schema(description = "경유 허브")
 	private List<String> stopoverHub;
 
 	@NotBlank
-	@Schema(description = "도착 허브")
+	@Schema(description = "도착 허브", example = "전라북도 군산시 조촌동 123")
 	private String arrivalHub;
 
 	@NotBlank
-	@Schema(description = "배송 주소")
+	@Schema(description = "배송 주소", example = "전라북도 군산시 궁포안2길 27 1층 123호")
 	private String address;
 
 	@NotNull
-	@Schema(description = "예상 도착 시간")
+	@Schema(description = "예상 소요 시간", example = "4.5")
 	private Double estimateTime;
 
 	@NotNull

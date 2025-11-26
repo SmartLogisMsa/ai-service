@@ -1,5 +1,6 @@
 package com.smartlogis.aiservice.domain;
 
+import com.smartlogis.aiservice.domain.dto.AiLogCreate;
 import com.smartlogis.aiservice.domain.exception.AiLogException;
 import com.smartlogis.aiservice.domain.exception.AiLogMessageCode;
 import com.smartlogis.common.domain.AbstractEntity;
@@ -29,7 +30,7 @@ public class AiLog extends AbstractEntity {
     private Long id;
 
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(nullable = false, length = 50)
 	private AiType type;
 
 	@Column(nullable = false, columnDefinition = "TEXT")
@@ -54,33 +55,24 @@ public class AiLog extends AbstractEntity {
 	@Column
 	private Long latency;
 
-	public static AiLog create(AiType type, String prompt, String model) {
-		validateType(type);
-		validatePrompt(prompt);
-		validateModel(model);
+	public static AiLog create(AiLogCreate request) {
+		validateType(request.type());
+		validatePrompt(request.prompt());
+		validateModel(request.model());
+		validateLatency(request.latency());
 
 		AiLog aiLog = new AiLog();
 
-		aiLog.type = type;
-		aiLog.prompt = prompt;
-		aiLog.model = model;
+		aiLog.type = request.type();
+		aiLog.prompt = request.prompt();
+		aiLog.fullPrompt = request.fullPrompt();
+		aiLog.response = request.response();
+		aiLog.errorMessage = request.errorMessage();
+		aiLog.status = request.status();
+		aiLog.model = request.model();
+		aiLog.latency = request.latency();
 
 		return aiLog;
-	}
-
-	public void success(String fullPrompt, String response, Long latency) {
-		validateLatency(latency);
-
-		this.fullPrompt = fullPrompt;
-		this.response = response;
-		this.latency = latency;
-		this.status = AiStatus.SUCCESS;
-	}
-
-	public void fail(String fullPrompt, String errorMessage) {
-		this.fullPrompt = fullPrompt;
-		this.errorMessage = errorMessage;
-		this.status = AiStatus.FAIL;
 	}
 
 	public void delete() { throw new AiLogException(AiLogMessageCode.DELETE_NOT_ALLOWED); }
@@ -103,8 +95,8 @@ public class AiLog extends AbstractEntity {
 		}
 	}
 
-	private void validateLatency(Long latency) {
-		if (latency == null || latency <= 0) {
+	private static void validateLatency(Long latency) {
+		if (latency != null && latency <= 0) {
 			throw new IllegalArgumentException("AI 응답시간(latency)은 0 이하일 수 없습니다.");
 		}
 	}

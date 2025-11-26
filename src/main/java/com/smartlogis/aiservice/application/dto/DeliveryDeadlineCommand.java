@@ -88,7 +88,7 @@ public record DeliveryDeadlineCommand(
 		params.put("orderer_name", this.ordererName());
 		params.put("orderer_email", this.ordererEmail());
 		params.put("order_date", formatter.format(this.orderDate()));
-		params.put("order_products", getParams());
+		params.put("order_products", getProducts());
 		params.put("order_memo", this.orderMemo() == null ? "" : this.orderMemo());
 		params.put("start_hub", this.startHub());
 		params.put("stopover_hub", getStopoverHub());

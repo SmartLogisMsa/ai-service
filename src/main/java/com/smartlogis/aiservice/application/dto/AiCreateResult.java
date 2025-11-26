@@ -30,8 +30,4 @@ public record AiCreateResult(
 			latency
 		);
 	}
-
-	public boolean success() {
-		return AiStatus.SUCCESS.equals(status);
-	}
 }
