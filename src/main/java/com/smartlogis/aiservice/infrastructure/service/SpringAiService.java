@@ -11,7 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.smartlogis.aiservice.application.dto.AiCreateResult;
-import com.smartlogis.aiservice.application.service.AiCreateService;
+import com.smartlogis.aiservice.application.service.AiGenerateService;
 import com.smartlogis.aiservice.infrastructure.SpringAiHelper;
 import com.smartlogis.aiservice.infrastructure.SpringAiModel;
 
@@ -19,12 +19,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SpringAiService implements AiCreateService {
+public class SpringAiService implements AiGenerateService {
 
 	private final SpringAiHelper clientHelper;
 
 	@Override
-	public AiCreateResult create(String prompt, Map<String, Object> params, String model) {
+	public AiCreateResult generate(String prompt, Map<String, Object> params, String model) {
 		ChatClient client = clientHelper.get(SpringAiModel.fromString(model));
 
 		String fullPrompt = PromptTemplate.builder()
@@ -52,10 +52,10 @@ public class SpringAiService implements AiCreateService {
 	}
 
 	@Override
-	public AiCreateResult create(Resource prompt, Map<String, Object> params, String model) {
+	public AiCreateResult generate(Resource prompt, Map<String, Object> params, String model) {
 		try {
 			String text = new String(prompt.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
-			return create(text, params, model);
+			return generate(text, params, model);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
