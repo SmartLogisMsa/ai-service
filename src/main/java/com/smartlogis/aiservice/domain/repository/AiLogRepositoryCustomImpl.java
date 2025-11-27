@@ -37,7 +37,7 @@ public class AiLogRepositoryCustomImpl implements AiLogRepositoryCustom {
 			condition.and(aiLog.model.eq(search.model()));
 		}
 
-		OrderSpecifier<?>[] orders = QuerydslSortUtils.toOrderSpecifiers(AiLog.class, "createdAt", pageable.getSort());
+		OrderSpecifier<?>[] orders = QuerydslSortUtils.toOrderSpecifiers(aiLog, "createdAt", pageable.getSort());
 
 		List<AiLog> contents = queryFactory
 			.selectFrom(aiLog)

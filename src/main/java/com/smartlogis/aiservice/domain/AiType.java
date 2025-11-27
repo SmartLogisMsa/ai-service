@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum AiType {
-	GENERATE_ORDER_SUMMARY("generate_order_summary");
+	DELIVERY_DEADLINE("delivery_deadline"),;
 
 	private final String value;
 
