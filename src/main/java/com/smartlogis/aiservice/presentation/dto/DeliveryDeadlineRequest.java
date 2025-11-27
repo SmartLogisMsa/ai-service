@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 import com.smartlogis.aiservice.infrastructure.SpringAiModel;
 import com.smartlogis.aiservice.presentation.annotation.EnumValid;
 
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(description = "최종 발송 시한 요청")
 public class DeliveryDeadlineRequest {
+	@JsonSetter(nulls = Nulls.SKIP)
 	@NotNull @EnumValid(enumClass = SpringAiModel.class)
 	@Schema(description = "AI 모델", defaultValue = "vertex_ai_gemini")
 	private String model = "vertex_ai_gemini";
