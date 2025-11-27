@@ -94,7 +94,7 @@ public record DeliveryDeadlineCommand(
 		params.put("stopover_hub", getStopoverHub());
 		params.put("arrival_hub", this.arrivalHub());
 		params.put("address", this.address());
-		params.put("estimate_time", this.estimateTime() + "시간");
+		params.put("estimate_time", this.estimateTime() + "분");
 		params.put("staff_name", this.staffName());
 		params.put("staff_email", this.staffEmail());
 
